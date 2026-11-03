@@ -1,0 +1,54 @@
+<div class="wallet-container">
+  <div class="wallet-header">
+    <div class="phone-notch"></div>
+    <h2>{{ i18n.t('wallet.header.title') }}</h2>
+    <p>{{ i18n.t('wallet.header.subtitle') }}</p>
+  </div>
+
+  <div class="card">
+    <div class="form-group">
+      <label for="nonce">{{ i18n.t('wallet.nonce.label') }}</label>
+      <input 
+        type="text" 
+        id="nonce" 
+        [ngModel]="nonceInput()" 
+        (ngModelChange)="nonceInput.set($event)"
+        [placeholder]="i18n.t('wallet.nonce.placeholder')" 
+      />
+    </div>
+
+    <div class="form-group checkbox-group">
+      <label>
+        <input 
+          type="checkbox" 
+          [ngModel]="isAgeValid()" 
+          (ngModelChange)="isAgeValid.set($event)" 
+        />
+        {{ i18n.t('wallet.age.label') }}
+      </label>
+      <small class="help-text">{{ i18n.t('wallet.age.help') }}</small>
+    </div>
+
+    <button class="btn-submit" (click)="submitPresentation()" [disabled]="isLoading()">
+      {{ isLoading() ? i18n.t('wallet.submitLoading') : i18n.t('wallet.submit') }}
+    </button>
+  </div>
+
+  @if (verificationResult(); as result) {
+    <div class="card result-card" [ngClass]="result.isAgeVerified ? 'success' : 'failed'">
+      <h3>{{ i18n.t('wallet.result.title') }}</h3>
+      <div class="result-details">
+        <p><strong>{{ i18n.t('wallet.result.status') }}</strong> {{ result.status }}</p>
+        <p><strong>{{ i18n.t('wallet.result.ageVerified') }}</strong> 
+          <span class="badge" [ngClass]="result.isAgeVerified ? 'badge-success' : 'badge-danger'">
+            {{ result.isAgeVerified ? i18n.t('wallet.result.yes') : i18n.t('wallet.result.no') }}
+          </span>
+        </p>
+        <p><strong>{{ i18n.t('wallet.result.message') }}</strong> {{ i18n.tOr(result.messageCode, result.message) }}</p>
+        @if (result.sessionToken) {
+          <p><strong>{{ i18n.t('wallet.result.sessionToken') }}</strong> <code>{{ result.sessionToken }}</code></p>
+        }
+      </div>
+    </div>
+  }
+</div>

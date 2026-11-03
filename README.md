@@ -1,59 +1,105 @@
-# EudiFrontend
+# EUDI Verifier — Frontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.8.
+Aplicación web (Angular 21) para la verificación de edad basada en el estándar **eIDAS 2.0** y **OpenID4VP**. Actúa como panel del verificador y, en desarrollo, incluye un simulador de EUDI Wallet.
 
-## Development server
+## Características
 
-To start a local development server, run:
+- Panel de verificación que solicita un *challenge* OpenID4VP (nonce + URI).
+- Simulador de wallet para enviar una presentación `vpToken` (solo en desarrollo).
+- Tema claro/oscuro persistente.
+- Internacionalización ES/EN con diccionario propio.
+- Notificaciones toast globales.
+- Configuración por entornos (desarrollo/producción).
 
-```bash
-ng serve
+## Stack
+
+- Angular 21 (standalone components + signals)
+- TypeScript 5.9
+- SCSS
+- Vitest / Angular unit-test builder
+
+## Estructura
+
+```
+src/
+  app/
+    components/          # Dashboard y simulador de wallet
+    services/            # API, notificaciones, tema e idioma
+    app.ts|html|scss     # Shell de la aplicación (navbar + toast)
+    app.routes.ts
+  environments/
+    environment.ts       # Desarrollo
+    environment.prod.ts  # Producción
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Requisitos
 
-## Code scaffolding
+- Node.js 20+ y npm 11+
+- Backend `eudi-verifier` en ejecución (por defecto `http://localhost:8080`)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+## Desarrollo local
 
 ```bash
-ng generate --help
+npm install
+npm start
 ```
 
-## Building
+La app queda en `http://localhost:4200/`.
 
-To build the project run:
+La URL del backend se configura en `src/environments/environment.ts`:
+
+```ts
+export const environment = {
+  production: false,
+  apiUrl: 'http://localhost:8080/api',
+  showWalletSimulator: true
+};
+```
+
+## Build de producción
 
 ```bash
-ng build
+npm run build
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+El resultado se genera en `dist/eudi-frontend/browser`.
 
-## Running unit tests
+En producción, `angular.json` reemplaza `environment.ts` por `environment.prod.ts`. Edita ahí:
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
+```ts
+export const environment = {
+  production: true,
+  apiUrl: 'https://TU-BACKEND.onrender.com/api',
+  showWalletSimulator: false
+};
 ```
 
-## Running end-to-end tests
+## Despliegue en Vercel
 
-For end-to-end (e2e) testing, run:
+El repo incluye `vercel.json` con:
 
-```bash
-ng e2e
-```
+- `buildCommand`: `npm run build`
+- `outputDirectory`: `dist/eudi-frontend/browser`
+- rewrite SPA a `index.html`
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+Pasos:
 
-## Additional Resources
+1. Importa el repositorio en Vercel.
+2. Framework preset: **Angular** (o "Other" respetando `vercel.json`).
+3. Verifica que `apiUrl` de `environment.prod.ts` apunta al backend en Render.
+4. En Render, añade el dominio de Vercel a `APP_CORS_ALLOWED_ORIGINS`.
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## Scripts
+
+| Comando | Descripción |
+| --- | --- |
+| `npm start` | Servidor de desarrollo |
+| `npm run build` | Build de producción |
+| `npm run watch` | Build en modo watch |
+| `npm test` | Tests unitarios |
+
+## Seguridad
+
+- No se suben secretos al repositorio (`.env`, `.vercel`, `node_modules`, `dist` están en `.gitignore`).
+- El simulador de wallet está desactivado en producción mediante `showWalletSimulator`.
+- Los mensajes del backend se muestran traducidos a partir de `messageCode`.

@@ -1,0 +1,42 @@
+<div class="dashboard-container">
+  <header class="dashboard-header">
+    <h2>{{ i18n.t('dashboard.header.title') }}</h2>
+    <p>{{ i18n.t('dashboard.header.subtitle') }}</p>
+  </header>
+
+  <div class="card">
+    <h3>{{ i18n.t('dashboard.start.title') }}</h3>
+    <p>{{ i18n.t('dashboard.start.description') }}</p>
+    
+    <button class="btn-primary" (click)="requestChallenge()" [disabled]="isLoading()">
+      {{ isLoading() ? i18n.t('dashboard.start.buttonLoading') : i18n.t('dashboard.start.button') }}
+    </button>
+  </div>
+
+  @if (challenge()) {
+    <div class="card qr-card">
+      <h3>{{ i18n.t('dashboard.challenge.title') }}</h3>
+      <p class="subtitle">{{ i18n.t('dashboard.challenge.subtitle') }}</p>
+      
+      <div class="qr-placeholder">
+        <!-- Simulación visual limpia de código QR basada en la URI -->
+        <div class="qr-box">
+          <span>📱 QR eIDAS</span>
+        </div>
+      </div>
+
+      <div class="challenge-details">
+        <div class="detail-row">
+          <strong>Nonce:</strong> <code>{{ challenge()?.nonce }}</code>
+        </div>
+        <div class="detail-row">
+          <strong>{{ i18n.t('dashboard.challenge.uri') }}</strong> 
+          <span class="uri-text">{{ challenge()?.presentationUri }}</span>
+        </div>
+        <div class="status-badge waiting">
+          {{ statusText() }}
+        </div>
+      </div>
+    </div>
+  }
+</div>
