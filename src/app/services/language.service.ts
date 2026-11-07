@@ -12,6 +12,8 @@ const ES = {
 
   'lang.switch': 'Cambiar a inglés',
 
+  'notice.coldStart': 'El servidor gratuito puede tardar entre 30 y 60 segundos en iniciar. La primera petición puede tardar un poco más.',
+
   'dashboard.header.title': 'Portal de Verificación eIDAS 2.0',
   'dashboard.header.subtitle': 'Control de acceso por edad (>15 años)',
   'dashboard.start.title': 'Iniciar Verificación',
@@ -70,6 +72,8 @@ const EN: Record<TranslationKey, string> = {
   'theme.toDark': 'Switch to dark mode',
 
   'lang.switch': 'Switch to Spanish',
+
+  'notice.coldStart': 'The free server may take 30 to 60 seconds to start. The first request may take a little longer.',
 
   'dashboard.header.title': 'eIDAS 2.0 Verification Portal',
   'dashboard.header.subtitle': 'Age access control (>15 years)',

@@ -37,6 +37,19 @@
   </div>
 </header>
 
+@if (isProduction && showColdStartNotice()) {
+  <div class="cold-start-notice">
+    <span class="notice-icon">⏳</span>
+    <span class="notice-text">{{ i18n.t('notice.coldStart') }}</span>
+    <button
+      type="button"
+      class="notice-close"
+      (click)="showColdStartNotice.set(false)"
+      aria-label="Cerrar aviso"
+    >×</button>
+  </div>
+}
+
 <!-- Notificación global flotante -->
 @if (notificationService.current(); as notif) {
   <div class="toast-notification" [ngClass]="notif.type">

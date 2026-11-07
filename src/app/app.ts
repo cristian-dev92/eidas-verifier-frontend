@@ -18,4 +18,6 @@ export class App {
   public themeService = inject(ThemeService);
   public i18n = inject(LanguageService);
   public readonly showWalletSimulator = environment.showWalletSimulator;
+  public readonly isProduction = environment.production;
+  public readonly showColdStartNotice = signal(environment.production);
 }
