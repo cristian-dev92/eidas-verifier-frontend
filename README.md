@@ -4,8 +4,8 @@ Aplicación web (Angular 21) para la verificación de edad basada en el estánda
 
 ## Características
 
-- Panel de verificación que solicita un *challenge* OpenID4VP (nonce + URI).
-- Simulador de wallet para enviar una presentación `vpToken` (solo en desarrollo).
+- Panel de verificación que solicita un *challenge* OpenID4VP (nonce + URI) y muestra un **QR real**.
+- Simulador de wallet que **pide al emisor una credencial SD-JWT firmada real** y la presenta (solo en desarrollo).
 - Tema claro/oscuro persistente.
 - Internacionalización ES/EN con diccionario propio.
 - Notificaciones toast globales.

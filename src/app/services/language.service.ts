@@ -22,7 +22,14 @@ const ES = {
   'dashboard.challenge.subtitle': 'Escanea este código con tu monedero digital o simula la respuesta:',
   'dashboard.challenge.uri': 'URI de Solicitud:',
   'dashboard.challenge.waiting': 'Esperando lectura del monedero...',
+  'dashboard.status.waiting': 'Esperando lectura del monedero...',
+  'dashboard.status.success': 'Verificación completada correctamente.',
+  'dashboard.status.invalidProof': 'La prueba de identidad no es válida.',
+  'dashboard.status.expired': 'El desafío ha expirado.',
+  'dashboard.status.rejected': 'El usuario no cumple el requisito de edad.',
+  'dashboard.result.title': 'Resultado de la verificación',
   'dashboard.notification.challengeSuccess': '¡Desafío OpenID4VP generado correctamente!',
+  'dashboard.notification.verified': '¡Verificación de edad completada con éxito!',
   'dashboard.notification.connectionError': 'Error de conexión: No se pudo comunicar con el servidor backend en el puerto 8080.',
 
   'wallet.header.title': 'Simulador EUDI Wallet',
@@ -30,7 +37,7 @@ const ES = {
   'wallet.nonce.label': 'Nonce del Desafío (OpenID4VP):',
   'wallet.nonce.placeholder': 'Pega aquí el nonce del Dashboard...',
   'wallet.age.label': 'Atributo de Edad: Válido (> 15 años)',
-  'wallet.age.help': 'Desmarca para simular un credencial inválido o de menor de edad.',
+  'wallet.age.help': 'Desmarca para emitir una credencial real de menor de edad y ver la denegación.',
   'wallet.submit': 'Firmar y Enviar Presentación (vpToken)',
   'wallet.submitLoading': 'Firmando y enviando VP...',
   'wallet.result.title': 'Resultado de la Verificación',
@@ -47,7 +54,9 @@ const ES = {
 
   'verification.success': 'Verificación de edad (>15 años) completada con éxito.',
   'verification.nonceInvalid': 'El nonce es inválido o ha expirado.',
-  'verification.invalidProof': 'La firma digital o prueba Verifiable Presentation es inválida.'
+  'verification.invalidProof': 'La firma digital o prueba Verifiable Presentation es inválida.',
+  'verification.ageNotMet': 'El usuario no cumple el requisito de edad.',
+  'verification.pending': 'Esperando la respuesta del monedero...'
 } as const;
 
 export type TranslationKey = keyof typeof ES;
@@ -72,7 +81,14 @@ const EN: Record<TranslationKey, string> = {
   'dashboard.challenge.subtitle': 'Scan this code with your digital wallet or simulate the response:',
   'dashboard.challenge.uri': 'Request URI:',
   'dashboard.challenge.waiting': 'Waiting for wallet scan...',
+  'dashboard.status.waiting': 'Waiting for wallet scan...',
+  'dashboard.status.success': 'Verification completed successfully.',
+  'dashboard.status.invalidProof': 'The identity proof is not valid.',
+  'dashboard.status.expired': 'The challenge has expired.',
+  'dashboard.status.rejected': 'The user does not meet the age requirement.',
+  'dashboard.result.title': 'Verification result',
   'dashboard.notification.challengeSuccess': 'OpenID4VP challenge generated successfully!',
+  'dashboard.notification.verified': 'Age verification completed successfully!',
   'dashboard.notification.connectionError': 'Connection error: Could not reach the backend server on port 8080.',
 
   'wallet.header.title': 'EUDI Wallet Simulator',
@@ -80,7 +96,7 @@ const EN: Record<TranslationKey, string> = {
   'wallet.nonce.label': 'Challenge Nonce (OpenID4VP):',
   'wallet.nonce.placeholder': 'Paste the nonce from the Dashboard here...',
   'wallet.age.label': 'Age Attribute: Valid (> 15 years)',
-  'wallet.age.help': 'Uncheck to simulate an invalid or underage credential.',
+  'wallet.age.help': 'Uncheck to issue a real underage credential and see the denial.',
   'wallet.submit': 'Sign and Send Presentation (vpToken)',
   'wallet.submitLoading': 'Signing and sending VP...',
   'wallet.result.title': 'Verification Result',
@@ -97,7 +113,9 @@ const EN: Record<TranslationKey, string> = {
 
   'verification.success': 'Age verification (>15 years) completed successfully.',
   'verification.nonceInvalid': 'The nonce is invalid or has expired.',
-  'verification.invalidProof': 'The digital signature or Verifiable Presentation proof is invalid.'
+  'verification.invalidProof': 'The digital signature or Verifiable Presentation proof is invalid.',
+  'verification.ageNotMet': 'The user does not meet the age requirement.',
+  'verification.pending': 'Waiting for the wallet response...'
 };
 
 const TRANSLATIONS: Record<Language, Record<TranslationKey, string>> = {

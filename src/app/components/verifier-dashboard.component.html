@@ -19,10 +19,13 @@
       <p class="subtitle">{{ i18n.t('dashboard.challenge.subtitle') }}</p>
       
       <div class="qr-placeholder">
-        <!-- Simulación visual limpia de código QR basada en la URI -->
-        <div class="qr-box">
-          <span>📱 QR eIDAS</span>
-        </div>
+        @if (qrDataUrl()) {
+          <img class="qr-image" [src]="qrDataUrl()" alt="Código QR de verificación OpenID4VP" />
+        } @else {
+          <div class="qr-box">
+            <span>📱 QR eIDAS</span>
+          </div>
+        }
       </div>
 
       <div class="challenge-details">
@@ -33,10 +36,23 @@
           <strong>{{ i18n.t('dashboard.challenge.uri') }}</strong> 
           <span class="uri-text">{{ challenge()?.presentationUri }}</span>
         </div>
-        <div class="status-badge waiting">
+        <div class="status-badge" [ngClass]="result()?.status === 'SUCCESS' ? 'success' : 'waiting'">
           {{ statusText() }}
         </div>
       </div>
+
+      @if (result(); as res) {
+        <div class="result-box" [ngClass]="res.status === 'SUCCESS' ? 'success' : 'failed'">
+          <h4>{{ i18n.t('dashboard.result.title') }}</h4>
+          <p>{{ i18n.tOr(res.messageCode, res.message) }}</p>
+          @if (res.sessionToken) {
+            <p class="session-token">
+              <strong>{{ i18n.t('wallet.result.sessionToken') }}</strong>
+              <code>{{ res.sessionToken }}</code>
+            </p>
+          }
+        </div>
+      }
     </div>
   }
 </div>

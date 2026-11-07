@@ -23,6 +23,23 @@ export interface VerificationResponse {
   messageCode?: string | null;
 }
 
+export interface VerificationStatusResponse {
+  nonce: string;
+  status: string;
+  isAgeVerified: boolean;
+  sessionToken: string | null;
+  message: string;
+  messageCode: string | null;
+  expiresAt: string;
+  completed: boolean;
+}
+
+export interface CredentialResponse {
+  credential: string;
+  format: string;
+  expiresAt: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -44,5 +61,24 @@ export class EudiApiService {
    */
   submitPresentation(payload: VerificationSubmissionRequest): Observable<VerificationResponse> {
     return this.http.post<VerificationResponse>(`${this.baseUrl}/submission`, payload);
+  }
+
+  /**
+   * Consulta el estado de un challenge (polling tras el escaneo del QR)
+   */
+  getStatus(nonce: string): Observable<VerificationStatusResponse> {
+    return this.http.get<VerificationStatusResponse>(
+      `${this.baseUrl}/status/${encodeURIComponent(nonce)}`
+    );
+  }
+
+  /**
+   * Solicita al emisor una credencial de edad firmada (SD-JWT real)
+   */
+  issueAgeCredential(ageOver15: boolean): Observable<CredentialResponse> {
+    return this.http.post<CredentialResponse>(
+      `${environment.apiUrl}/v1/issuer/credential`,
+      { ageOver15 }
+    );
   }
 }

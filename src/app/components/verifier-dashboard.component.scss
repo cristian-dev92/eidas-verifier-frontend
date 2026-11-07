@@ -94,6 +94,16 @@
         font-weight: bold;
         color: #4b5563;
       }
+
+      .qr-image {
+        width: 220px;
+        height: 220px;
+        padding: 8px;
+        box-sizing: border-box;
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+      }
     }
 
     .challenge-details {
@@ -130,6 +140,48 @@
         background-color: #fef3c7;
         color: #92400e;
         margin-top: 0.5rem;
+
+        &.success {
+          background-color: #d1fae5;
+          color: #065f46;
+        }
+      }
+    }
+
+    .result-box {
+      margin-top: 1.25rem;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: left;
+      border-left: 4px solid #cbd5e1;
+
+      h4 {
+        margin: 0 0 0.5rem;
+        font-size: 1rem;
+        color: #374151;
+      }
+
+      p {
+        margin: 0.25rem 0;
+        font-size: 0.9rem;
+        color: #4b5563;
+      }
+
+      .session-token code {
+        background: rgba(0, 0, 0, 0.06);
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: monospace;
+      }
+
+      &.success {
+        background-color: #f0fdf4;
+        border-left-color: #10b981;
+      }
+
+      &.failed {
+        background-color: #fef2f2;
+        border-left-color: #ef4444;
       }
     }
   }
@@ -187,6 +239,33 @@
         .status-badge {
           background-color: #422006;
           color: #fde68a;
+
+          &.success {
+            background-color: #052e24;
+            color: #6ee7b7;
+          }
+        }
+      }
+
+      .result-box {
+        h4 {
+          color: #f1f5f9;
+        }
+
+        p {
+          color: #cbd5e1;
+        }
+
+        .session-token code {
+          background: rgba(255, 255, 255, 0.1);
+        }
+
+        &.success {
+          background-color: #052e24;
+        }
+
+        &.failed {
+          background-color: #3f1d1d;
         }
       }
     }
